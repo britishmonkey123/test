@@ -1,0 +1,135 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { FaSpotify, FaApple, FaInstagram, FaTiktok } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
+
+export default function HomePage() {
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    emailjs.sendForm(
+      "service_2j0ln5z",
+      "template_sjvp52l",
+      e.target,
+      "2WWfgjXJAIILr_8cf"
+    ).then(
+      () => {
+        alert("Message sent successfully!");
+        e.target.reset();
+      },
+      (error) => {
+        alert("Something went wrong. Please try again later.");
+        console.error("EmailJS Error:", error);
+      }
+    );
+  };
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbxImzGugwLdzH_RBp0WtXIZc2tJWXALa6RH1kYj6xuPOAxOMEYwrghoz7p-C3FQlLtkdg/exec", {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      });
+
+      alert("Thanks for signing up!");
+      form.reset();
+    } catch (err) {
+      console.error("Newsletter Signup Error:", err);
+      alert("Something went wrong. Please try again later.");
+    }
+  };
+
+  const cloudBackground = "bg-[url('https://www.transparenttextures.com/patterns/clouds.png')] bg-cover bg-fixed opacity-30";
+
+  return (
+    <div className="min-h-screen bg-[#a0c4d0] text-[#6b6b6b] font-sans space-y-32">
+      {/* Header / Nav */}
+      <header className="p-4 flex justify-between items-center shadow-md bg-[#a0c4d0]/80 backdrop-blur-sm sticky top-0 z-50 text-[#6b6b6b]">
+        <h1 className="text-3xl font-bold">DELIA</h1>
+        <nav className="space-x-4">
+          <a href="#about" className="hover:underline">About</a>
+          <a href="#music" className="hover:underline">Music</a>
+          <a href="#contact" className="hover:underline">Contact</a>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden py-32 px-4 text-center bg-gradient-to-b from-[#d3d3d3] to-[#a0c4d0]" style={{ backgroundAttachment: 'fixed' }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/gray-floral.png')] bg-cover bg-fixed opacity-20 z-0"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/clouds.png')] bg-cover bg-fixed opacity-30 z-0"></div>
+        <div className="relative z-10">
+          <h2 className="text-5xl font-bold mb-4">DELIA</h2>
+          <p className="text-lg mb-10 max-w-2xl mx-auto leading-loose tracking-wide">Music for the in-between moments — never go back, carry it forward.</p>
+
+          <div className="flex justify-center mb-10">
+            <img src="https://via.placeholder.com/600x300" alt="Delia visual" className="rounded-xl shadow-md" />
+          </div>
+
+          <div className="flex justify-center mb-10">
+            <iframe 
+              width="560" 
+              height="315" 
+              src="https://www.youtube.com/embed/IYN4SQs_DPA?start=28&autoplay=0&mute=1" 
+              title="DELIA Video" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="relative py-32 px-6 bg-[#d3d3d3] text-center transition-all duration-700 ease-in-out transform" style={{ backgroundAttachment: 'fixed' }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/clouds.png')] bg-cover bg-fixed opacity-30 z-0"></div>
+        <div className="relative z-10">
+          <h3 className="text-3xl font-semibold mb-6">Who is DELIA?</h3>
+          <p className="max-w-3xl mx-auto text-xl leading-relaxed tracking-wider space-y-6">
+            DELIA all started with two kids who grew up on the same street in San Diego with a vision to connect a community much bigger than themselves with music.<br /><br />
+            Driven by the thought of bringing together a <i>passionate, supportive, music-loving community</i> with <u>true human connection</u> was our vision of fully living in the moment - what we call <b>the in-betweens</b>.<br /><br />
+            We all go through <span className="text-5xl font-bold">highs</span> and <span className="text-sm">lows</span> in this journey of life, but it's the <u>inbetween moments</u> that are the ones we believe in focusing on. Those are the times when you may be transitioning from one chapter in your life to the next, typically filled with noise, distraction, and high energy. But these moments are also some of the most important moments in life.<br /><br />
+            We want to help you embrace those moments. Let go of the stress or anxiety, and live in what's real. We are here to help navigate you through the chaos and find peace in the now, in the present, to be real, and to be alive in the moment.<br /><br />
+            DELIA is more than just music - it's the energy you need to get through the in-between moments in life.<br /><br />
+            Let's all live in this moment, <i>together</i>, through what we have made for you - DELIA.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative py-24 px-4 bg-[#a0c4d0] text-center text-[#6b6b6b] transition-all duration-700 ease-in-out transform" style={{ backgroundAttachment: 'fixed' }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/clouds.png')] bg-cover bg-fixed opacity-30 z-0"></div>
+        <div className="relative z-10">
+          <h3 className="text-3xl font-semibold mb-6">Connect</h3>
+          <form className="max-w-lg mx-auto space-y-4" onSubmit={handleContactSubmit}>
+            <input type="text" name="from_name" placeholder="Your Name" className="w-full p-4 border border-[#6b6b6b]/30 bg-white/10 backdrop-blur-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6b6b6b]/60" required />
+            <input type="email" name="reply_to" placeholder="Your Email" className="w-full p-4 border border-[#6b6b6b]/30 bg-white/10 backdrop-blur-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6b6b6b]/60" required />
+            <textarea name="message" placeholder="Your Message" className="w-full p-4 border border-[#6b6b6b]/30 bg-white/10 backdrop-blur-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6b6b6b]/60" rows="5" required></textarea>
+            <Button type="submit">Send Message</Button>
+          </form>
+        </div>
+      </section>
+
+      {/* Signup Section */}
+      <section className="relative py-24 px-4 bg-[#8bae7e] text-center text-white transition-all duration-700 ease-in-out transform" style={{ backgroundAttachment: 'fixed' }}>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/clouds.png')] bg-cover bg-fixed opacity-30 z-0"></div>
+        <div className="relative z-10">
+          <h3 className="text-3xl font-semibold mb-6">Join The Family</h3>
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">
+            <input name="email" type="email" placeholder="Enter your email" className="w-full p-4 border border-white/30 bg-white/10 backdrop-blur-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-white/60" required />
+            <Button type="submit">Subscribe</Button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 text-center text-sm bg-[#a0c4d0] text-[#6b6b6b]">
+        © {new Date().getFullYear()} DELIA. All rights reserved.
+      </footer>
+    </div>
+  );
+}
